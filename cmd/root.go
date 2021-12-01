@@ -10,19 +10,23 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "app",
 	Short: "App entry command",
-	RunE: func(_ *cobra.Command, _ []string) error {
-		fmt.Printf("Server.Port: %s", config.Config.Server.Port)
-		return nil
+	Run: func(_ *cobra.Command, _ []string) {
+		fmt.Printf("Config => %+v", config.Config)
 	},
 }
 
 func init() {
+	rootCmd.Flags().StringP("environment", "e", "development", "Environment where Application is in")
 	rootCmd.Flags().StringP("port", "p", "8080", "Port to run Application server on")
 
 	cobra.OnInitialize(config.Init(config.ConfigFlag{
 		Field: "server.port",
 		Flag:  rootCmd.Flags().Lookup("port"),
-	}))
+	},
+		config.ConfigFlag{
+			Field: "environment",
+			Flag:  rootCmd.Flags().Lookup("environment"),
+		}))
 }
 
 func Execute() {

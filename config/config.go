@@ -7,7 +7,8 @@ import (
 )
 
 type Configuration struct {
-	Server struct {
+	Environment string
+	Server      struct {
 		Port string
 	}
 }
