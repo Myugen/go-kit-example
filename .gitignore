@@ -1,0 +1,14 @@
+# JetBrains
+.idea/
+*.iml
+
+# MacOS
+.DS_store
+
+# Project specific files
+config.yml
+
+# Project binaries
+main
+go-kit-example
+app
